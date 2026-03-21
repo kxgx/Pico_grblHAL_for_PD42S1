@@ -2,6 +2,13 @@
 
 基于 grblHAL 的 RP2040/Pico2 W CNC 控制器固件 - PD42S1 板级支持
 
+> **⚠️ 重要声明**
+> 
+> - 本项目为 **个人学习研究版本**，基于 grblHAL 官方代码修改
+> - 代码修改由 **AI 辅助完成**（使用 Cursor、GitHub Copilot 等工具）
+> - 仅适用于 PD42S1 特定硬件配置，不保证通用性
+> - 使用前请仔细阅读代码，风险自负
+
 ## 📋 项目概述
 
 本项目是为 **PD42S1** 开发板定制的 grblHAL 固件，基于 Raspberry Pi Pico2 W（RP2350）微控制器。
@@ -194,16 +201,33 @@ Pico_grblHAL_for_PD42S1/
 
 ---
 
-## 🙏 致谢
+## 👤 作者与贡献
 
-### 原固件仓库
+### 主要开发者
+- **kxgx** - 项目发起与硬件测试
+
+### AI 辅助工具
+本项目的代码修改由以下 AI 工具辅助完成：
+- **Cursor** - IDE 集成 AI 编程助手
+- **GitHub Copilot** - 代码生成与建议
+- **其他 AI 工具** - 代码审查与优化
+
+> **说明**: 本项目为个人基于 grblHAL 官方的二次开发，所有代码修改均在 AI 辅助下完成，未经过官方审核。
+
+---
+
+## 🙏 致谢与原项目
+
+### 原固件仓库（特别感谢）
 - **grblHAL/RP2040**: https://github.com/grblHAL/RP2040
   - 官方 RP2040 平台驱动
   - 提供了完整的基础框架
+  - **本项目基于此仓库修改**
 
 - **grblHAL/grblHAL**: https://github.com/grblHAL/grblHAL
   - 核心 grblHAL 项目
   - 高级 CNC 控制功能
+  - **核心算法来源于此**
 
 ### 社区资源
 - **Raspberry Pi Pico SDK**: https://github.com/raspberrypi/pico-sdk
