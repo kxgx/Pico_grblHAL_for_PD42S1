@@ -11,7 +11,7 @@
 
 ## 📋 项目概述
 
-本项目是为 **PD42S1** 开发板定制的 grblHAL 固件，基于 Raspberry Pi Pico2 W（RP2350）微控制器。
+本项目是为 **PD42S1**（42 电机驱动板）定制的 grblHAL 固件，基于 Raspberry Pi Pico2 W（RP2350）微控制器。
 
 ### 主要特性
 
