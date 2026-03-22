@@ -43,9 +43,9 @@
 #endif
 
 // Define step pulse output pins.
-// Using GPIO_PIO_1 mode - Each axis has independent PIO state machine (supports non-consecutive pins)
+// Using GPIO_OUTPUT mode - Non-consecutive pins: GP19/GP8/GP12/GP4
 // X=GP19, Y=GP8, Z=GP12, A=GP4
-#define STEP_PORT               GPIO_PIO_1
+#define STEP_PORT               GPIO_OUTPUT
 #define X_STEP_PIN              19        // GP19
 #define Y_STEP_PIN              8         // GP8
 #define Z_STEP_PIN              12        // GP12

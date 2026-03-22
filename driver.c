@@ -1161,7 +1161,9 @@ inline static __attribute__((always_inline)) void stepperSetStepOutputs (axes_si
 
     step_dir_sr4_write(sr8_pio, sr8_sm, sd_sr.value);
 
-#else // GPIO_PIO, GPIO_PIO_1
+#else // GPIO_PIO, GPIO_PIO_1, GPIO_OUTPUT
+
+#if STEP_PORT != GPIO_OUTPUT
 
     uint_fast8_t idx = 0;
 
@@ -1181,6 +1183,58 @@ inline static __attribute__((always_inline)) void stepperSetStepOutputs (axes_si
   #if STEP_PORT == GPIO_PIO
     step_pulse_generate(step_pio, step_sm, pio_steps.value);
   #endif
+
+#endif
+
+#endif
+
+#if STEP_PORT == GPIO_OUTPUT
+
+    // Direct GPIO output for non-consecutive pins - turn on then off
+    step_out.bits ^= settings.steppers.step_invert.bits;
+    
+    if(step_out.bits & X_AXIS_BIT)
+        gpio_put(X_STEP_PIN, 1);
+#if X_GANGED
+    if(step_out.bits & X_AXIS_BIT)
+        gpio_put(X2_STEP_PIN, 1);
+#endif
+    if(step_out.bits & Y_AXIS_BIT)
+        gpio_put(Y_STEP_PIN, 1);
+#if Y_GANGED
+    if(step_out.bits & Y_AXIS_BIT)
+        gpio_put(Y2_STEP_PIN, 1);
+#endif
+    if(step_out.bits & Z_AXIS_BIT)
+        gpio_put(Z_STEP_PIN, 1);
+#if Z_GANGED
+    if(step_out.bits & Z_AXIS_BIT)
+        gpio_put(Z2_STEP_PIN, 1);
+#endif
+#if N_AXIS > 3
+    if(step_out.bits & AXIS3_BIT)
+        gpio_put(A_STEP_PIN, 1);
+#endif
+    
+    // Small delay for pulse width
+    busy_wait_us(1);
+    
+    // Turn off all GPIO outputs
+    gpio_put(X_STEP_PIN, 0);
+#if X_GANGED
+    gpio_put(X2_STEP_PIN, 0);
+#endif
+    gpio_put(Y_STEP_PIN, 0);
+#if Y_GANGED
+    gpio_put(Y2_STEP_PIN, 0);
+#endif
+    gpio_put(Z_STEP_PIN, 0);
+#if Z_GANGED
+    gpio_put(Z2_STEP_PIN, 0);
+#endif
+#if N_AXIS > 3
+    gpio_put(A_STEP_PIN, 0);
+#endif
 
 #endif
 }
