@@ -224,7 +224,7 @@ Pico_grblHAL_for_PD42S1/
   - 提供了完整的基础框架
   - **本项目基于此仓库修改**
 
-- **grblHAL/grblHAL**: https://github.com/grblHAL/grblHAL
+- **grblHAL/grblHAL**: https://github.com/grblHAL/core
   - 核心 grblHAL 项目
   - 高级 CNC 控制功能
   - **核心算法来源于此**
