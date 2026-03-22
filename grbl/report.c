@@ -210,30 +210,28 @@ FLASHMEM void report_init (void)
 // operation. Errors events can originate from the g-code parser, settings module, or asynchronously
 // from a critical error, such as a triggered hard limit. Interface should always monitor for these
 // responses.
-FLASHMEM static status_code_t report_status_message (status_code_t status_code)
+FLASHMEM static status_code_t report_status_message (status_code_t status)
 {
-    switch(status_code) {
+    if(status == Status_Handled)
+        status = Status_OK;
 
-        case Status_Handled:
-            status_code = Status_OK;
-            // no break
-        case Status_OK: // STATUS_OK
+    if(hal.stream.is_connected()) {
+        if(status == Status_OK)
             hal.stream.write("ok" ASCII_EOL);
-            break;
-
-        default:
-            hal.stream.write(appendbuf(3, "error:", uitoa((uint32_t)status_code), ASCII_EOL));
-            break;
+        else
+            hal.stream.write(appendbuf(3, "error:", uitoa((uint32_t)status), ASCII_EOL));
     }
 
-    return status_code;
+    return status;
 }
 
 // Prints alarm messages.
 FLASHMEM static alarm_code_t report_alarm_message (alarm_code_t alarm_code)
 {
-    hal.stream.write_all(appendbuf(3, "ALARM:", uitoa((uint32_t)alarm_code), ASCII_EOL));
-    hal.delay_ms(100, NULL); // Force delay to ensure message clears output stream buffer.
+    if(hal.stream.is_connected()) {
+        hal.stream.write_all(appendbuf(3, "ALARM:", uitoa((uint32_t)alarm_code), ASCII_EOL));
+        hal.delay_ms(100, NULL); // Force delay to ensure message clears output stream buffer.
+    }
 
     return alarm_code;
 }
@@ -856,10 +854,12 @@ FLASHMEM void report_startup_line (uint8_t n, char *line)
 
 FLASHMEM void report_execute_startup_message (char *line, status_code_t status_code)
 {
-    hal.stream.write(">");
-    hal.stream.write(line);
-    hal.stream.write(":");
-    grbl.report.status_message(status_code);
+    if(hal.stream.is_connected()) {
+        hal.stream.write(">");
+        hal.stream.write(line);
+        hal.stream.write(":");
+        grbl.report.status_message(status_code);
+    }
 }
 
 // Prints build info line

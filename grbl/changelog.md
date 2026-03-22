@@ -1,5 +1,13 @@
 ## grblHAL changelog
 
+<a name="20260321">Build 20260321
+
+Core:
+
+* Small changes to ensure that output during startup do not cause hangs due to no client connection when native USB is default.
+
+---
+
 <a name="20260320">Build 20260320
 
 Core:
