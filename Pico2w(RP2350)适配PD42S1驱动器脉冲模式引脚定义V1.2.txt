@@ -1,0 +1,29 @@
+=============激光模块PWM====================
+GP1	        PWM
+
+=============PD42S1脉冲模式====================
+GP2		DIR_X
+GP3		DIR_Y
+GP4		DIR_Z
+GP5		DIR_A
+GP6		STP_X
+GP7		STP_Y
+GP8		STP_Z
+GP9		STP_A
+GP10	EN_X
+GP11	EN_Y
+GP12	EN_Z
+GP13	EN_A
+
+=============限位====================
+Ground    L_GND	
+GP21	L_A
+GP20	L_Z
+GP19	L_Y
+GP18	L_X
+
+=============i2c设备====================
+3V3 Out  I2C_3.3V
+Ground  I2C_GND
+GP17	I2C0_SCL
+GP16       I2C0_SDA
